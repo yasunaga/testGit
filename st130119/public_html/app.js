@@ -255,6 +255,7 @@ Ext.setup({
             '</ul>'
         );
 */
+/*
         var tpl = Ext.XTemplate.from('tplOs');
         tpl.overwrite(document.body, {
             oslist: [
@@ -264,6 +265,181 @@ Ext.setup({
                 { name: 'Windows XP' }
             ]
         });
-    }
+*/
+/*
+var tpl = new Ext.XTemplate(
+    '<table border="1">',
+    '<tpl for="rows">',
+    '<tr>',
 
+    '<tpl for="cols">',
+        '<td>{parent.row}行 {#}列 : {name}</td>',
+    '</tpl>',
+
+    '</tr>',
+    '</tpl>',
+    '</table>'
+);
+
+tpl.overwrite(document.body, {
+    rows: [{
+        row: 1,
+        cols: [{ name: 'Item1' }, { name: 'Item2' },{ name: 'Item3' }]
+    },{
+        row: 2,
+        cols: [{ name: 'Item4' },{ name: 'Item5' },{ name: 'Item6' }]
+    },{
+        row: 3,
+        cols: [{ name: 'Item7' },{ name: 'Item8' },{ name: 'Item9' }]
+    }]
+});
+*/
+/*
+var tpl = new Ext.XTemplate(
+    '<p>波平の子供: ',
+    '<tpl for="kids">',
+        '<p>{#}: {name}',  // 各アイテムに自動的にふられた番号
+        'の現在の年齢: {age+60}</p>',  // <-- 基本的な演算
+    '</tpl></p>'
+);
+tpl.overwrite(document.body, {
+    kids: [
+        {name: 'サザエ', age: 24},
+        {name: 'カツオ', age: 11},
+        {name: 'ワカメ', age: 9}
+    ]
+});
+*/
+        // ブログのデータを取ってくるストア
+        var store = Ext.create('Ext.data.TreeStore', {
+
+            fields: [
+                'title', 'link', 'author', 'contentSnippet', 'content',
+                {name: 'leaf', defaultValue: true}
+            ],
+
+            root: {
+                leaf: false
+            },
+
+            proxy: {
+                type: 'jsonp',
+                url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://feeds.feedburner.com/SenchaBlog',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'responseData.feed.entries'
+                }
+            }
+        });
+
+        Ext.Viewport.add({
+            xtype: 'tabpanel',
+            tabBarPosition: 'bottom',
+            items: [{
+                title: 'ホーム',
+                iconCls: 'home',
+                html: 'Hello World'
+            }, {
+                xtype: 'nestedlist',
+                title: 'ブログ',
+                iconCls: 'star',
+                displayField: 'title',  // リストに表示するフィールド
+
+                // 前に定義したストア
+                store: store,
+
+                // 詳細を表示するパネル
+                detailCard: {
+                    scrollable: true,
+                    styleHtmlContent: true,
+                    tpl: [
+                        '<div class="blog-author">author: {author}</div>',
+                        '<div class="blog-content">{content}</div>',
+                        '<a href="{link}" target="_blank">続きを読む...</a>'
+                    ]
+                },
+
+                listeners: {
+                    itemtap: function(nestedList, list, index, element, post) {
+                        // 詳細パネルを取得してコンテンツをセットする
+                        //this.getDetailCard().setHtml(post.get('content'));
+                        this.getDetailCard().setData(post.data);
+                    }
+                }
+            }, {
+                title: 'お問い合わせ',
+                iconCls: 'user',
+                xtype: 'formpanel',
+                url: 'contact.php',
+                layout: 'vbox',
+
+                items: [{
+                    xtype: 'fieldset',
+                    instructions: '(メールアドレスの記入は任意です)',
+                    items: [{
+                        xtype: 'textfield',
+                        label: 'お名前'
+                    },{
+                        xtype: 'emailfield',
+                        label: 'メールアドレス'
+                    },{
+                        xtype: 'textareafield',
+                        label: 'メッセージ'
+                    }]
+                },{
+                    xtype: 'button',
+                    text: '送信',
+                    ui: 'confirm',
+                    handler: function() {
+                        this.up('formpanel').submit();
+                    }
+                }]
+            }]
+        });
+/*
+// モデルを定義します
+        Ext.define('Image', {
+            extend: 'Ext.data.Model',
+            config: {
+                proxy: {
+                    type: 'ajax',
+                    url: 'dataview.json',
+                    reader: {
+                        type: 'json',
+                        rootProperty: 'data'
+                    }
+                },
+                fields: [
+                    { name:'image', type:'string' },
+                    { name:'title', type:'string' },
+                    { name:'caption', type:'string' }
+                ]
+            }
+        });
+
+        // ストアを生成します
+        var store = Ext.create('Ext.data.Store', {
+            model: 'Image',
+            autoLoad: true
+        });
+
+        // テンプレートを生成します
+        var imageTpl = new Ext.XTemplate(
+            '<div class="thumb-wrap">',
+            '<img src="{image}" />',
+            '<h2>{title}</h2>',
+            '</div>'
+        );
+
+        // データビューを生成します
+        Ext.Viewport.add({
+            xtype: 'dataview',
+            store: store,
+            itemTpl: imageTpl,
+            itemSelector: 'div.thumb-wrap',
+            emptyText: 'No images available',
+            renderTo: Ext.getBody()
+        });
+*/
+    }
 });
