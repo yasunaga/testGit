@@ -146,6 +146,7 @@ Ext.setup({
         });
     }
 */
+/*
     onReady: function () {
 
         // ブログのデータを取ってくるストア
@@ -229,4 +230,40 @@ Ext.setup({
             }]
         });
     }
+*/
+    onReady: function() {
+/*
+        var t = new Ext.Template(
+            '<div id="{id}">',
+                '<span class="{cls}">{name:trim} {value:ellipsis(16)}</span>',
+            '</div>',
+            {compile: true}
+        );
+        var el = t.append('emptyDiv', {
+            id: Ext.id(), 
+            cls: 'myclass', 
+            name: '    名前は    ', 
+            value: '寿限無寿限無五劫の擦り切れ海砂利水魚の水行末雲来末風来末'
+        }, true);
+*/
+/*
+        var tpl = new Ext.XTemplate(
+            '<ul>',
+            '<tpl for="oslist">',
+                '<li>{#}. {name}</li>',
+            '</tpl>',
+            '</ul>'
+        );
+*/
+        var tpl = Ext.XTemplate.from('tplOs');
+        tpl.overwrite(document.body, {
+            oslist: [
+                { name: 'Mac OS X' },
+                { name: 'Windows 7' },
+                { name: 'Windows Vista' },
+                { name: 'Windows XP' }
+            ]
+        });
+    }
+
 });
