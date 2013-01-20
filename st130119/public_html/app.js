@@ -310,6 +310,7 @@ tpl.overwrite(document.body, {
     ]
 });
 */
+/*
         // ブログのデータを取ってくるストア
         var store = Ext.create('Ext.data.TreeStore', {
 
@@ -396,6 +397,7 @@ tpl.overwrite(document.body, {
                 }]
             }]
         });
+*/
 /*
 // モデルを定義します
         Ext.define('Image', {
@@ -441,5 +443,28 @@ tpl.overwrite(document.body, {
             renderTo: Ext.getBody()
         });
 */
+        Ext.define('ShowObjectPlugin', {
+            alias: 'plugin.showobj',
+            init: function(cmp) {
+                cmp.showObject = function(obj) {
+                    var html = '';
+                    for (var item in obj) {
+                        html += item + ': ' + obj[item] + '<br />';
+                    }
+                    cmp.setHtml(html);
+                };
+            }
+        });
+
+        var panel = Ext.create('Ext.Panel', {
+            plugins: ['showobj']
+        });
+
+        Ext.Viewport.add(panel);
+        panel.showObject({
+            hoge: 'fuga',
+            foo: 'bar'
+        });
+
     }
 });
