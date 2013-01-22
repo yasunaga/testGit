@@ -4,7 +4,10 @@
 
 Ext.application({
     name: 'EX',
+    models: ['User'],
+    stores: ['Users'],
+    views: ['Main', 'List', 'Edit'],
     launch: function () {
-        console.log('launch application');
+        Ext.create('EX.view.Main', {fullscreen: true});
     }
 });
