@@ -2,5 +2,9 @@
  * app.js
  */
 
-Ext.setup({
+Ext.application({
+    name: 'EX',
+    launch: function () {
+        console.log('launch application');
+    }
 });
