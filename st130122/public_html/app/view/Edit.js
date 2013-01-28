@@ -20,6 +20,16 @@ Ext.define('EX.view.Edit', {
                 xtype: 'textareafield',
                 name: 'bio',
                 label: '略歴'
+            }, {
+                xtype: 'toolbar',
+                docked: 'bottom',
+                items: [{
+                    text: '保存',
+                    itemId: 'saveButton'
+                }, {
+                    text: '削除',
+                    itemId: 'deleteButton'
+                }]
             }]
         }]
     }
