@@ -20,11 +20,14 @@ Ext.define('EX.controller.Users', {
             },
             'button#deleteButton': {
                 tap: 'onDeleteTap'
+            },
+            'button#addButton': {
+                tap: 'onAddTap'
             }
         }
     },
 
-    onItemTap: function (list, index, target, record, e, eOpts) {
+    onItemTap: function (list, index, target, record, e, eopts) {
         var me = this,
             edit = Ext.widget('useredit');
 
@@ -34,21 +37,32 @@ Ext.define('EX.controller.Users', {
 
     onSaveTap: function (button) {
         var me = this,
-        form = button.up('formpanel'),
-        rec = form.getRecord(),
-        values = form.getValues(),
-        store = Ext.getStore('Users');
-        rec.set(values);
+            form = button.up('formpanel'),
+            rec = form.getRecord(),
+            values = form.getValues(),
+            store = Ext.getStore('Users');
+        if (rec){
+            rec.set(values);
+        } else {
+            rec = Ext.create('EX.model.User');
+            rec.set(values);
+            store.add(rec);
+        }
         me.getNav().pop();
     },
     onDeleteTap: function (button) {
         var me = this,
-        form = button.up('formpanel'),
-        rec = form.getRecord(),
-        store = Ext.getStore('Users');
+            form = button.up('formpanel'),
+            rec = form.getRecord(),
+            store = Ext.getStore('Users');
 
         store.remove(rec);
         me.getNav().pop();
+    },
+    onAddTap: function (button) {
+        var me = this,
+            edit = Ext.widget('useredit');
+        me.getNav().push(edit);
     }
 
 });

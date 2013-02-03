@@ -9,6 +9,14 @@ Ext.define('EX.view.List', {
         store: 'Users',
         itemTpl: [
             '<div>{name}</div>'
-        ]
+        ],
+        items: [{
+            xtype: 'toolbar',
+            docked: 'bottom',
+            items: [{
+                text: '追加',
+                itemId: 'addButton'
+            }]
+        }]
     }
 });
