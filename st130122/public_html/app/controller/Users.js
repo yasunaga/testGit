@@ -28,11 +28,19 @@ Ext.define('EX.controller.Users', {
     },
 
     onItemTap: function (list, index, target, record, e, eopts) {
+/*
         var me = this,
             edit = Ext.widget('useredit');
 
         edit.setRecord(record);
         me.getNav().push(edit);
+*/
+        var me = this;
+        var store = record.comments();
+            commentList = Ext.widget('commentlist', { store: store });
+
+        store.load();
+        me.getNav().push(commentList);
     },
 
     onSaveTap: function (button) {

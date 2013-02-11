@@ -29,7 +29,8 @@ Ext.define('EX.model.User', {
                 type: 'json',
                 encode: true
             }
-        }
+        },
+        hasMany: {model: 'EX.model.Comment', name: 'comments'}
     }
 });
 
