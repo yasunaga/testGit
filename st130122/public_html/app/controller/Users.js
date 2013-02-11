@@ -48,6 +48,7 @@ Ext.define('EX.controller.Users', {
             rec.set(values);
             store.add(rec);
         }
+        store.sync();
         me.getNav().pop();
     },
     onDeleteTap: function (button) {
@@ -57,6 +58,7 @@ Ext.define('EX.controller.Users', {
             store = Ext.getStore('Users');
 
         store.remove(rec);
+        store.sync();
         me.getNav().pop();
     },
     onAddTap: function (button) {

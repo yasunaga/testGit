@@ -10,6 +10,26 @@ Ext.define('EX.model.User', {
             'name',
             'email',
             'bio'
-        ]
+        ],
+        proxy: {
+            type: 'ajax',
+//            url: 'data/user.php',
+            api: {
+                create: 'data/adduser.php',
+                read: 'data/user.php',
+                update: 'data/updateuser.php',
+                destroy: 'data/deleteuser.php',
+            },
+            reader: {
+                type: 'json',
+                rootProperty: 'data',
+                successProperty: 'success'
+            },
+            writer: {
+                type: 'json',
+                encode: true
+            }
+        }
     }
 });
+
