@@ -54,6 +54,10 @@ Ext.define('ScheduleApp.view.Header', {
         flex: 2
     }, {
         border: false,
+        id: 'scope-btn',
+        style: {
+            'text-align': 'right'
+        },
         items: [{
             xtype: 'button',
             text: 'DAY',

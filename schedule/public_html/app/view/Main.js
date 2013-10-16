@@ -2,10 +2,7 @@ Ext.define('ScheduleApp.view.Main', {
     extend: 'Ext.container.Container',
     requires:[
         'Ext.tab.Panel',
-        'Ext.layout.container.Border',
-        'ScheduleApp.view.Week',
-        'ScheduleApp.view.UserList',
-        'ScheduleApp.view.Header'
+        'Ext.layout.container.Border'
     ],
     
     xtype: 'app-main',
@@ -24,6 +21,7 @@ Ext.define('ScheduleApp.view.Main', {
         width: 250
     },{
         region: 'center',
-        xtype: 'weekpanel'
+        xtype: 'centerpanel',
+        id: 'centerpanel'
     }]
 });
