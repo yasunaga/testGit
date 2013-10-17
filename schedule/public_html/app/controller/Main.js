@@ -2,11 +2,11 @@ Ext.define('ScheduleApp.controller.Main', {
     extend: 'Ext.app.Controller',
     controllers: [
         // TODO: add controllers here
-        'Header', 'UserList', 'Center'
+        'Center', 'Header', 'UserList'
     ],
     views: [
         // TODO: add views here
-        'Header', 'UserList', 'Center'
+        'Center', 'Header', 'UserList'
     ],
     init: function () {
         console.log('Main#init()');

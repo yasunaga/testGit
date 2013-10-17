@@ -4,10 +4,14 @@
 Ext.define('ScheduleApp.view.Center', {
     extend: 'Ext.panel.Panel',
     xtype: 'centerpanel',
-    layout: 'fit',
+    layout: 'card',
     activeItem: 0,
+    boder: false,
     items: [{
-        border: false,
-        html: 'ベースです'
+        xtype: 'weekpanel'
+    }, {
+        xtype: 'daypanel'
+    }, {
+        xtype: 'monthpanel'
     }]
 });

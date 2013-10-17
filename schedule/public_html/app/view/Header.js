@@ -33,7 +33,10 @@ Ext.define('ScheduleApp.view.Header', {
             style: {
                 margin: '3px 5px 0 0'
             },
-            id: 'prev-btn'
+            id: 'prev-btn',
+            handler: function (b) {
+                b.up('headerpanel').firePrev();
+            }
         }, {
             text: 'Today',
             xtype: 'button',
@@ -41,7 +44,10 @@ Ext.define('ScheduleApp.view.Header', {
             style: {
                 margin: '3px 5px 0 0'
             },
-            id: 'today-btn'
+            id: 'today-btn',
+            handler: function (b) {
+                b.up('headerpanel').fireToday();
+            }
         }, {
             xtype: 'button',
             text: '&gt;',
@@ -49,7 +55,10 @@ Ext.define('ScheduleApp.view.Header', {
             style: {
                 margin: '3px 0 0 0'
             },
-            id: 'next-btn'
+            id: 'next-btn',
+            handler: function (b) {
+                b.up('headerpanel').fireNext();
+            }
         }],
         flex: 2
     }, {
@@ -66,7 +75,10 @@ Ext.define('ScheduleApp.view.Header', {
             style: {
                 margin: '3px 5px 0 0'
             },
-            id: 'day-btn'
+            id: 'day-btn',
+            handler: function (b) {
+                b.up('headerpanel').fireToggle('day');
+            }
         }, {
             xtype: 'button',
             text: 'WEEK',
@@ -75,7 +87,10 @@ Ext.define('ScheduleApp.view.Header', {
             style: {
                 margin: '3px 5px 0 0'
             },
-            id: 'week-btn'
+            id: 'week-btn',
+            handler: function (b) {
+                b.up('headerpanel').fireToggle('week');
+            }
         }, {
             xtype: 'button',
             text: 'MONTH',
@@ -84,8 +99,31 @@ Ext.define('ScheduleApp.view.Header', {
             style: {
                 margin: '3px 0 0 0'
             },
-            id: 'month-btn'
+            id: 'month-btn',
+            handler: function (b) {
+                b.up('headerpanel').fireToggle('month');
+            }
         }],
         flex: 1
-    }]
+    }],
+    fireToggle: function (mode) {
+        var me = this;
+        console.log('fireToggle');
+        me.fireEvent('changeView', mode);
+    },
+    fireNext: function () {
+        var me = this;
+        console.log('fireNext');
+        me.fireEvent('next');
+    },
+    firePrev: function () {
+        var me = this;
+        console.log('firePrev');
+        me.fireEvent('prev');
+    },
+    fireToday: function () {
+        var me = this;
+        console.log('fireToday');
+        me.fireEvent('today');
+    }
 });

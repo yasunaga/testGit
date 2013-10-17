@@ -12,13 +12,22 @@ Ext.define('ScheduleApp.controller.Header', {
     }],
     // 表示スコープ
     viewScope: 'week',
+    prevScope: undefined,
     init: function () {
         var me = this;
-//        me.getScore();
-//        me.setCalendar();
+        me.getScope();
+        me.setCalendar();
+
+        me.control({
+            'headerpanel': {
+                changeView: me.onChangeView,
+                next: me.onNext,
+                prev: me.onPrev,
+                today: me.onToday
+            }
+        });
     },
-    getScore: function () {
-/*
+    getScope: function () {
         var me = this;
         if (Ext.getCmp('day-btn').pressed) {
             me.viewScope = 'day';
@@ -30,16 +39,68 @@ Ext.define('ScheduleApp.controller.Header', {
             Ext.getCmp('week-btn').toggle(true);
             me.viewScope = 'week';
         }
-*/
     },
     setCalendar: function () {
-/*
+        console.log('setCalendar');
         var me = this;
-        switch (me.viewScope) {
+        if (me.prevScope == me.viewScope) {
+            Ext.getCmp(me.prevScope+'-btn').toggle(true);
+        }
+//        me.getController('Center').onDisplay(me.viewScope);
+        me.getCenter().fireEvent('display', me.viewScope);
+        me.prevScope = me.viewScope;
+    },
+    onChangeView: function (mode) {
+        var me = this;
+        switch (mode) {
+        case 'day':
+            me.viewScope = 'day';
+            me.setCalendar();
+            break;
         case 'week':
-            me.getController('Week').onDisplay();
+            me.viewScope = 'week';
+            me.setCalendar();
+            break;
+        case 'month':
+            me.viewScope = 'month';
+            me.setCalendar();
             break;
         }
-*/
+    },
+    onNext: function () {
+        var me = this;
+        switch (me.viewScope) {
+        case 'day':
+            break;
+        case 'week':
+            me.getCenter().fireEvent('next', me.viewScope);
+            break;
+        case 'month':
+            break;
+        }
+    },
+    onPrev: function () {
+        var me = this;
+        switch (me.viewScope) {
+        case 'day':
+            break;
+        case 'week':
+            me.getCenter().fireEvent('prev', me.viewScope);
+            break;
+        case 'month':
+            break;
+        }
+    },
+    onToday: function () {
+        var me = this;
+        switch (me.viewScope) {
+        case 'day':
+            break;
+        case 'week':
+            me.getCenter().fireEvent('today', me.viewScope);
+            break;
+        case 'month':
+            break;
+        }
     }
 });
