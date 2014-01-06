@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>drag and drop</title>
+    <style>
+        table {
+            width: 500px;
+        }
+        table td {
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <script src="js/jquery.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/dndBase.js"></script>
+    <script src="js/dndSort.js"></script>
+    <script src="js/touch-action.js"></script>
+    <script src="js/app.js"></script>
+    <h1>drag and drop</h1>
+    <div class="grid">
+        <table class="drag">
+            <tr id="dnd-1">
+                <td>AAA</td>
+                <td class="move"><p>ドラッグポイント</p></td>
+                <td>AAA</td>
+                <td>AAA</td>
+            </tr>
+            <tr id="dnd-2">
+                <td>BBB</td>
+                <td class="move"><p>ドラッグポイント</p></td>
+                <td>BBB</td>
+                <td>BBB</td>
+            </tr>
+            <tr id="dnd-3">
+                <td>CCC</td>
+                <td class="move"><p>ドラッグポイント</p></td>
+                <td>CCC</td>
+                <td>CCC</td>
+            </tr>
+            <tr id="dnd-4">
+                <td>DDD</td>
+                <td class="move"><p>ドラッグポイント</p></td>
+                <td>DDD</td>
+                <td>DDD</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+
